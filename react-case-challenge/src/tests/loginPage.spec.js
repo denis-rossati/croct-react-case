@@ -18,6 +18,10 @@ describe('Login page tests', () => {
   })
 
   it('Should have a submit button', () => {
-
+    const { getByRole } = renderWithRouter(<LoginPage />)
+    const submitButton = getByRole('button', {
+      type: 'submit'
+    })
+    expect(submitButton).toBeDefined()
   })
 })
