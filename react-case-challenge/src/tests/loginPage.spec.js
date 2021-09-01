@@ -11,7 +11,7 @@ describe('Login page components existence', () => {
   it('Should have the right path', () => {
     const { history } = renderWithRouter(<LoginPage />)
     const pathname = history.location.pathname
-    expect(pathname).toBe('/')
+    expect(pathname).toBe('/login')
   })
 
   it('Should have two text inputs', () => {
