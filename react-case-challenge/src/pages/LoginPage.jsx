@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router'
 
 export default function LoginPage () {
   const [validPassword, setValidPassword] = useState(false)
   const [validEmail, setValidEmail] = useState(false)
   const [buttonDisabled, setButtonDisabled] = useState(true)
+  const [shouldRedirect, setShouldRedirect] = useState(false)
 
   const willEnableButton = () => validEmail && validPassword ? setButtonDisabled(false) : setButtonDisabled(true)
 
@@ -16,24 +18,27 @@ export default function LoginPage () {
       setValidEmail(false)
     }
 
-    willEnableButton()
+    return willEnableButton()
   }
 
   const verifyPassword = ({ target: { value } }) => {
-    if (value.length > 5) {
+    if (value.length >= 5) {
       setValidPassword(true)
     } else {
       setValidPassword(false)
     }
 
-    willEnableButton()
+    return willEnableButton()
   }
+
+  const redirectToMainPage = () => setShouldRedirect(true)
 
   return (
     <div>
       <input type="text" onChange={verifyEmail} placeholder="e-mail" />
-      <input type="password"onChange={verifyPassword} placeholder="password" />
-      <button type="submit" disabled={buttonDisabled} >Log in</button>
+      <input type="password"onKeyDown={verifyPassword} placeholder="password" />
+      <button type="submit" onClick={redirectToMainPage} disabled={buttonDisabled} >Log in</button>
+      { <Redirect to="/"}
     </div>
   )
 }
