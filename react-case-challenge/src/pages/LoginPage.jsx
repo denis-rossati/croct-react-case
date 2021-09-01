@@ -31,14 +31,17 @@ export default function LoginPage () {
     return willEnableButton()
   }
 
-  const redirectToMainPage = () => setShouldRedirect(true)
+  const redirectToMainPage = () => {
+    event.preventDefault()
+    return setShouldRedirect(true)
+  }
 
   return (
     <div>
       <input type="text" onChange={verifyEmail} placeholder="e-mail" />
-      <input type="password"onKeyDown={verifyPassword} placeholder="password" />
+      <input type="password"onChange={verifyPassword} placeholder="password" />
       <button type="submit" onClick={redirectToMainPage} disabled={buttonDisabled} >Log in</button>
-      { <Redirect to="/" /> && shouldRedirect}
+      { shouldRedirect && <Redirect to="/main-page" /> }
     </div>
   )
 }
