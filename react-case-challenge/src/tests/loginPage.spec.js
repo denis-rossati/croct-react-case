@@ -9,4 +9,15 @@ describe('Login page tests', () => {
     expect(pathname).toBe('/')
   })
 
+  it('Should have two text inputs', () => {
+    const { getByPlaceholderText } = renderWithRouter(<LoginPage />)
+    const emailInput = getByPlaceholderText('e-mail')
+    const passwordInput = getByPlaceholderText('password')
+    expect(emailInput).toBeDefined()
+    expect(passwordInput).toBeDefined()
+  })
+
+  it('Should have a submit button', () => {
+
+  })
 })
