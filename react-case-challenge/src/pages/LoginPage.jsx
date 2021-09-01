@@ -38,7 +38,7 @@ export default function LoginPage () {
       <input type="text" onChange={verifyEmail} placeholder="e-mail" />
       <input type="password"onKeyDown={verifyPassword} placeholder="password" />
       <button type="submit" onClick={redirectToMainPage} disabled={buttonDisabled} >Log in</button>
-      { <Redirect to="/"}
+      { <Redirect to="/" /> && shouldRedirect}
     </div>
   )
 }

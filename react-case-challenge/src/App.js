@@ -5,16 +5,18 @@ import {
   Route
 } from 'react-router-dom'
 
-function App() {
+import LoginPage from './pages/LoginPage'
+
+function App () {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" >
-
+        <Route exact path="/login" >
+          <LoginPage />
         </Route>
       </Switch>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App
