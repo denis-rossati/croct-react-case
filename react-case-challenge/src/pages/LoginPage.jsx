@@ -1,21 +1,28 @@
 import React, { useState } from 'react'
 
 export default function LoginPage () {
-  const [validPassword, setValidPassword] = useState()
-  const [validEmail, setValidEmail] = useState(false);
+  const [validPassword, setValidPassword] = useState(false)
+  const [validEmail, setValidEmail] = useState(false)
   const [buttonDisabled, setButtonDisabled] = useState(true)
 
-  const verifyEmail = ({ target }) => {
+  const verifyEmail = ({ target: { value } }) => {
     const emailRegex = /[\w\S^0-9]@[\w\S^0-9].com/gm
-    if (emailRegex.test(target.value)) {
+    if (emailRegex.test(value)) {
+      setValidEmail(true)
+    } else {
+      setValidEmail(false)
+    }
+
+    if (validPassword && validEmail) {
       return setButtonDisabled(true)
     }
   }
+  
 
   return (
     <div>
       <input type="text" onChange={verifyEmail} placeholder="e-mail" />
-      <input type="password" placeholder="password" />
+      <input type="password"onChange={verifyPassword} placeholder="password" />
       <button type="submit" disabled={buttonDisabled} >Log in</button>
     </div>
   )
