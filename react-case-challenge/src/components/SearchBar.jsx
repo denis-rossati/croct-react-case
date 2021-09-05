@@ -1,7 +1,11 @@
 import React from 'react';
 import magnifier from '../icons/magnifying-glass.png';
 
-export default function searchBar() {
+export default function searchBar({ searchFunction }) {
+  const [inputValue, setInputValue] = useState('');
+
+  const changeInputState = (value) => setInputValue(value);
+
   return (
     <div>
       <form>
@@ -10,11 +14,13 @@ export default function searchBar() {
           name="search-box"
           type="text"
           placeholder="Insert your search here..."
+          onChange={({ target: { value } }) => changeInputState(value)}
         />
         <button
           id="search-button"
           name="search-button"
           type="button"
+          onClick={() => searchFunction()}
         >
           <img
             src={magnifier}
