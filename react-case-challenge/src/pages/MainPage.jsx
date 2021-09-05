@@ -7,7 +7,7 @@ import CustomGreetingMessage from '../components/CustomGreetingMessage';
 import findCountry from '../helper/findCountryName';
 
 export default function MainPage() {
-  const [meals, setMeals] = useState([]);
+  const [meals, setMeals] = useState({});
 
   const setMealByResult = async (value) => {
     const query = `https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`;
