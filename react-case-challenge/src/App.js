@@ -1,11 +1,22 @@
 import React from 'react'
+import {
+  BrowserRouter,
+  Switch,
+  Route
+} from 'react-router-dom'
 
-function App() {
+import LoginPage from './pages/LoginPage'
+
+function App () {
   return (
-    <h1>
-      oi
-    </h1>
-  );
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/login" >
+          <LoginPage />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
