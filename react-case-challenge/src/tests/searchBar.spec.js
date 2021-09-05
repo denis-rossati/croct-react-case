@@ -5,13 +5,22 @@ import React from 'react'
 import renderWithRouter from './helper/renderWithRouter'
 import { fireEvent } from '@testing-library/dom'
 import { toBeDisabled, toBeEnabled } from '@testing-library/jest-dom/extend-expect'
-import LoginPage from '../pages/LoginPage'
+import searchBar from '../components/searchBar';
+
+describe('Check existence of searchBar components', () => {
+  it('Should have a text input', () => {
+    const { getByRole } = renderWithRouter(<searchBar />)
+    const textInput = getByRole('textbox', {
+      placeholder: 'Insert your search here...'
+    })
+  })
+})
 
 describe('Login page components existence', () => {
   it('Should have the right path', () => {
     const { history } = renderWithRouter(<LoginPage />)
     const pathname = history.location.pathname
-    expect(pathname).toBe('/login')
+    expect(pathname).toBe('/')
   })
 
   it('Should have two text inputs', () => {
@@ -65,16 +74,21 @@ describe('Inputs in login page', () => {
   it('Should allow the user\'s login', () => {
     const {
       getByPlaceholderText,
-      getByRole
+      getByRole,
+      history
     } = renderWithRouter(<LoginPage />)
     const emailInput = getByPlaceholderText('e-mail')
     const passwordInput = getByPlaceholderText('password')
+
+    fireEvent.change(passwordInput, { target: { value: '1234567' } })
+    fireEvent.change(emailInput, { target: { value: 'email@valid.com' } })
+
     const submitButton = getByRole('button', {
       type: 'submit'
     })
-    expect(submitButton).toBeDisabled()
-    fireEvent.change(passwordInput, { target: { value: '123456' } })
-    fireEvent.change(emailInput, { target: { value: 'email@valid.com' } })
-    expect(submitButton).toBeEnabled()
+
+    fireEvent.click(submitButton)
+    const { pathname } = history.location
+    expect(pathname).toBe('/')
   })
 })
