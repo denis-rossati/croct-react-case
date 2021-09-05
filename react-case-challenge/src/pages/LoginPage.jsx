@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useCroct } from '@croct/plug-react';
 import { Redirect } from 'react-router-dom';
 
 export default function LoginPage() {
+  const croct = useCroct();
   const [validPassword, setValidPassword] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(true);
@@ -33,8 +35,13 @@ export default function LoginPage() {
     return willEnableButton();
   };
 
+  const setPersona = useCallback(
+    () => croct.user.edit().set('email', validEmail).save(),
+  );
+
   const redirectToMainPage = (evt) => {
     evt.preventDefault();
+    setPersona();
     return setShouldRedirect(true);
   };
 

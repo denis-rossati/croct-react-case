@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import magnifier from '../icons/magnifying-glass.png';
 
 export default function searchBar({ searchFunction }) {
@@ -20,7 +20,7 @@ export default function searchBar({ searchFunction }) {
           id="search-button"
           name="search-button"
           type="button"
-          onClick={() => searchFunction()}
+          onClick={() => searchFunction(inputValue)}
         >
           <img
             src={magnifier}
