@@ -22,7 +22,6 @@ export default function MealGrid({ mealResult }) {
     }
     return 'Loading recipes...';
   };
-  console.log(mealResult);
 
   return (
     <section>
