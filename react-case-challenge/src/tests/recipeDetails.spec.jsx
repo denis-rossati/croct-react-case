@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import renderWithRouter from './helper/renderWithRouter';
-import recipesDetails from '../pages/RecipeDetails';
+import RecipesDetails from '../pages/RecipeDetails';
 
 global.fetch = jest.fn(() => Promise.resolve({
   json: () => Promise.resolve({
@@ -11,7 +11,9 @@ global.fetch = jest.fn(() => Promise.resolve({
 }));
 
 describe('testing recipeDetails page', () => {
-  it('Shold have the main components', () => {
-
+  it('Shold start with loading text', () => {
+    const { getByText } = renderWithRouter(<RecipesDetails />);
+    const loadingText = getByText('Loading...');
+    expect(loadingText).toBeDefined();
   });
 });
