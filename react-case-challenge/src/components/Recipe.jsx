@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useCroct } from '@croct/plug-react';
 import PropTypes from 'prop-types';
+import blackHeart from '../icons/black-heart.png';
+import whiteHeart from '../icons/heart.png';
 
 export default function Recipe({ mealDetails }) {
+  const croct = useCroct();
+  const [like, setLike] = useState(false);
+
   const showIngredients = () => {
     const listIngredients = [];
     const ingredientKeys = Object.keys(mealDetails).filter((el) => el.includes('strIngredient'));
@@ -21,6 +27,35 @@ export default function Recipe({ mealDetails }) {
     listIngredients.splice(0, 1);
     return listIngredients;
   };
+
+  const userInterests = async () => {
+    if (like) {
+      await croct
+        .user
+        .edit()
+        .add('interests', mealDetails.strArea)
+        .save();
+    } else {
+      const interests = await croct.evaluate('user\'s interests');
+      const filteredInterests = interests.filter((interest) => interest !== mealDetails.strArea);
+      await croct
+        .user
+        .edit()
+        .clear('interests')
+        .add('interests', filteredInterests)
+        .save();
+    }
+  };
+
+  const userLiked = async () => {
+    setLike(!like);
+    await userInterests();
+    croct.evaluate('user\'s interests')
+      .then((i) => console.log(i));
+  };
+
+  const displayHeart = () => (like ? blackHeart : whiteHeart);
+
   return (
     <main>
       <h1>{mealDetails.strMeal}</h1>
@@ -32,6 +67,9 @@ export default function Recipe({ mealDetails }) {
         {' '}
         {mealDetails.strTags}
       </h2>
+      <button type="button" onClick={() => userLiked()}>
+        <img src={displayHeart()} alt="like button" />
+      </button>
       <ul>
         { showIngredients() }
       </ul>
