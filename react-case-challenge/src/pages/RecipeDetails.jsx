@@ -11,15 +11,12 @@ export default function RecipeDetails() {
     ? (<p>Loading...</p>) : <p>{mealContent.strMeal}</p>);
 
   useEffect(() => {
-    const fetchingMeal = () => {
-      const url = `www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
-      fetch(url)
-        .then((response) => response.json())
-        .then(({ meals: [meals] }) => {
-          setIsLoading(false);
-          setMealContent(meals);
-        })
-        .catch(() => setIsLoading(true));
+    const fetchingMeal = async () => {
+      const url = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`;
+      const request = await fetch(url, { headers: { Accept: 'application/json' } });
+      const { meals: [meals] } = await request.json();
+      setIsLoading(false);
+      setMealContent(meals);
     };
     fetchingMeal();
   }, []);
