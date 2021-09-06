@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 /* the disable above is about eslint not recognizing test patterns */
 import React from 'react';
-import { fireEvent } from '@testing-library/dom';
 import renderWithRouter from './helper/renderWithRouter';
 import SearchBar from '../components/SearchBar';
 
