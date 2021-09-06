@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Recipe from '../components/Recipe';
+import formatObject from '../helper/formatObject';
 
 export default function RecipeDetails() {
   // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
+  // eslint-disable-next-line no-unused-vars
   const [mealContent, setMealContent] = useState([]);
 
   const renderContent = () => (isLoading
-    ? (<p>Loading...</p>) : <p>{mealContent.strMeal}</p>);
+    ? (<p>Loading...</p>) : <Recipe mealDetails={mealContent} />);
 
   useEffect(() => {
     const fetchingMeal = async () => {
@@ -16,7 +19,8 @@ export default function RecipeDetails() {
       const request = await fetch(url, { headers: { Accept: 'application/json' } });
       const { meals: [meals] } = await request.json();
       setIsLoading(false);
-      setMealContent(meals);
+      const formatedObject = formatObject(meals);
+      setMealContent(formatedObject);
     };
     fetchingMeal();
   }, []);

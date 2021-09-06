@@ -11,11 +11,11 @@ import RecipeDetails from './pages/RecipeDetails';
 function App() {
   return (
     <Switch>
-      <Route exact path="/:id">
-        <RecipeDetails />
-      </Route>
       <Route exact path="/main-page">
         <MainPage />
+      </Route>
+      <Route exact path="/:id">
+        <RecipeDetails />
       </Route>
       <Route exact path="/">
         <LoginPage />
