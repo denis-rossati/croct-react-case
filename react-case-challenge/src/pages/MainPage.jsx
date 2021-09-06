@@ -10,8 +10,8 @@ export default function MainPage() {
   const [meals, setMeals] = useState({});
 
   const setMealByResult = async (value) => {
-    const query = `https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`;
-    const request = await fetch(query, { headers: { Accept: 'application/json' } });
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${value}`;
+    const request = await fetch(url, { headers: { Accept: 'application/json' } });
     const response = await request.json();
     setMeals(response);
   };
