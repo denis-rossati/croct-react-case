@@ -50,8 +50,6 @@ export default function Recipe({ mealDetails }) {
   const userLiked = async () => {
     setLike(!like);
     await userInterests();
-    croct.evaluate('user\'s interests')
-      .then((i) => console.log(i));
   };
 
   const displayHeart = () => (like ? blackHeart : whiteHeart);
