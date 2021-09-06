@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 import React from 'react';
+import { screen, act } from '@testing-library/react';
 import renderWithRouter from './helper/renderWithRouter';
 import RecipeDetails from '../pages/RecipeDetails';
 import mockApiResponse from './helper/apiResponseMock';
@@ -20,5 +21,8 @@ describe('Testing page after backend have been throwed a response', () => {
     global.fetch = jest.fn(() => Promise.resolve({
       json: () => Promise.resolve(mockApiResponse),
     }));
+    act(() => renderWithRouter(<RecipeDetails />));
+    const titleMealText = screen.getByText('Teriyaki Chicken Casserole');
+    expect(titleMealText).toBeDefined();
   });
 });
