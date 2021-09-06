@@ -23,6 +23,8 @@ describe('Testing page after backend have been throwed a response', () => {
     }));
     act(() => renderWithRouter(<RecipeDetails />));
     const titleMealText = screen.getByText('Teriyaki Chicken Casserole');
+    const mealImage = screen.getByAltText('Teriyaki Chicken Casserole frame');
+    expect(titleMealText).toBeDefined();
     expect(titleMealText).toBeDefined();
   });
 });
