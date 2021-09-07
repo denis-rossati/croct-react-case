@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import magnifier from '../icons/magnifying-glass.png';
+import user from '../icons/profile.png';
 
 export default function searchBar({ searchFunction }) {
   const [inputValue, setInputValue] = useState('');
@@ -9,6 +11,9 @@ export default function searchBar({ searchFunction }) {
   return (
     <div>
       <form>
+        <Link to="/profile">
+          <img src={user} alt="user icon" />
+        </Link>
         <input
           id="search-box"
           name="search-box"
