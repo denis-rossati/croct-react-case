@@ -9,11 +9,11 @@ export default function searchBar({ searchFunction }) {
   const changeInputState = (value) => setInputValue(value);
 
   return (
-    <div>
+    <nav>
+      <Link to="/profile">
+        <img src={user} alt="user icon" />
+      </Link>
       <form>
-        <Link to="/profile">
-          <img src={user} alt="user icon" />
-        </Link>
         <input
           id="search-box"
           name="search-box"
@@ -33,6 +33,6 @@ export default function searchBar({ searchFunction }) {
           />
         </button>
       </form>
-    </div>
+    </nav>
   );
 }
