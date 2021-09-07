@@ -4,11 +4,13 @@ import PropTypes from 'prop-types';
 export default function CustomGreetingMessage({ country, changeMealGrid }) {
   const [haveFindRecipe, setHaveFindedRecipe] = useState(true);
 
+  const customCallbackMessage = (callback, message) => callback(message);
+
   const emergencyRecipes = () => {
     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
       .then((response) => response.json())
       .then((data) => changeMealGrid(data))
-      .catch((err) => console.error(err));
+      .catch((err) => customCallbackMessage(console.error, err));
   };
 
   useEffect(() => {
