@@ -28,28 +28,59 @@ export default function Recipe({ mealDetails }) {
     return listIngredients;
   };
 
-  const userInterests = async () => {
+  const removeInterest = async () => {
+    const interests = await croct.evaluate('user\'s interests');
+    const filteredInterests = JSON
+      .stringify(interests.filter((interest) => interest !== mealDetails.strArea));
+
+    const recipes = await croct.evaluate('user\'s recipes');
+    const filteredRecipes = JSON
+      .stringify(recipes.filter(({ id }) => Number(id) !== Number(mealDetails.idMeal)));
+
+    await croct
+      .user
+      .edit()
+      .clear('interests')
+      .add('interests', filteredInterests)
+      .save();
+
+    console.log(filteredRecipes);
+    /* two "clear" in a row did not make it :( so I have to separe them */
+    await croct
+      .user
+      .edit()
+      .clear('custom.recipes')
+      .add('custom.recipes', filteredRecipes)
+      .save();
+  };
+
+  const addInterest = async () => {
+    await croct
+      .user
+      .edit()
+      .add('interests', mealDetails.strArea)
+      .add('custom.recipes', {
+        title: mealDetails.strMeal,
+        thumb: mealDetails.strMealThumb,
+        id: mealDetails.idMeal,
+      })
+      .save();
+    const result = await croct.evaluate('user\'s recipes');
+    console.log(result);
+  };
+
+  const manageCroctUser = async () => {
+    if (!like) {
+      await addInterest();
+    }
     if (like) {
-      await croct
-        .user
-        .edit()
-        .add('interests', mealDetails.strArea)
-        .save();
-    } else {
-      const interests = await croct.evaluate('user\'s interests');
-      const filteredInterests = interests.filter((interest) => interest !== mealDetails.strArea);
-      await croct
-        .user
-        .edit()
-        .clear('interests')
-        .add('interests', filteredInterests)
-        .save();
+      await removeInterest();
     }
   };
 
   const userLiked = async () => {
     setLike(!like);
-    await userInterests();
+    await manageCroctUser();
   };
 
   const displayHeart = () => (like ? blackHeart : whiteHeart);

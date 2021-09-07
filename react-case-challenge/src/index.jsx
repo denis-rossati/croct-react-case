@@ -7,7 +7,7 @@ import App from './App';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <CroctProvider track debug appId="00000000-0000-0000-0000-000000000000">
+      <CroctProvider track appId="00000000-0000-0000-0000-000000000000">
         <App />
       </CroctProvider>
     </BrowserRouter>
