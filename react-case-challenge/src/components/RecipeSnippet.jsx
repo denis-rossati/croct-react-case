@@ -9,7 +9,7 @@ export default function RecipeSnippet({ recipe }) {
   return (
     <div key={idMeal}>
       <Link to={`/${idMeal}`}>
-        <img src={strMealThumb} alt="Recipe after been cooked" />
+        <img src={strMealThumb} alt="Recipe after being prepared" />
         <p>{strMeal}</p>
         <p>{ strArea }</p>
       </Link>
