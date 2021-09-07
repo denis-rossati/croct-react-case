@@ -1,19 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import RecipeSnippet from './RecipeSnippet';
 
 export default function MealGrid({ mealResult }) {
-  const mealsMap = (arrMeals) => arrMeals.map(({
-    idMeal, strMealThumb, strMeal, strArea,
-  }) => (
-    <div key={idMeal}>
-      <Link to={`/${idMeal}`}>
-        <img src={strMealThumb} alt="Recipe after been cooked" />
-        <p>{strMeal}</p>
-        <p>{ strArea }</p>
-      </Link>
-    </div>
-  ));
+  const mealsMap = (arrMeals) => arrMeals.map((recipe) => (<RecipeSnippet recipe={recipe} />));
 
   const renderMeals = () => {
     const { meals } = mealResult;

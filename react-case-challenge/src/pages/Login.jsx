@@ -6,6 +6,7 @@ export default function LoginPage() {
   const croct = useCroct();
   const [validPassword, setValidPassword] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
+  const [email, setEmail] = useState('');
   const [buttonDisabled, setButtonDisabled] = useState(true);
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
@@ -16,6 +17,7 @@ export default function LoginPage() {
   const verifyEmail = ({ target: { value } }) => {
     // I will keep the regex very simple (and insecure, I know) just this time XD
     const emailRegex = /[\w\S]+@[\w\S]+.com/gm;
+    setEmail(value);
     if (emailRegex.test(value)) {
       setValidEmail(true);
     } else {
@@ -36,7 +38,7 @@ export default function LoginPage() {
   };
 
   const setPersona = useCallback(
-    () => croct.user.edit().set('email', validEmail).save(),
+    () => croct.user.edit().set('custom.email', email).save(),
   );
 
   const redirectToMainPage = (evt) => {
