@@ -31,11 +31,24 @@ export default function Recipe({ mealDetails }) {
   const removeInterest = async () => {
     const interests = await croct.evaluate('user\'s interests');
     const filteredInterests = interests.filter((interest) => interest !== mealDetails.strArea);
+
+    const recipes = await croct.evaluate('user\'s recipes');
+    const filteredRecipes = recipes.filter(({ id }) => id !== mealDetails.idMeal);
+
     await croct
       .user
       .edit()
       .clear('interests')
       .add('interests', filteredInterests)
+      .save();
+
+    /* two "clear" in a row did not make it :( so I have to separe them */
+    console.log()
+    await croct
+      .user
+      .edit()
+      .clear('custom.recipes')
+      .add('custom.recipes', ...filteredRecipes)
       .save();
   };
 
@@ -44,13 +57,6 @@ export default function Recipe({ mealDetails }) {
       .user
       .edit()
       .add('interests', mealDetails.strArea)
-      .save();
-  };
-
-  const saveRecipe = async () => {
-    await croct
-      .user
-      .edit()
       .add('custom.recipes', {
         title: mealDetails.strMeal,
         thumb: mealDetails.strMealThumb,
@@ -60,10 +66,10 @@ export default function Recipe({ mealDetails }) {
   };
 
   const manageCroctUser = async () => {
-    if (like) {
+    if (!like) {
       await addInterest();
-      await saveRecipe();
-    } else {
+    }
+    if (like) {
       await removeInterest();
     }
   };
