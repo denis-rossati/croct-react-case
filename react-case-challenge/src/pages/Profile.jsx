@@ -26,7 +26,7 @@ export default function Profile() {
         }
         return acc;
       }, [])
-      .map((foodArea) => <li>{foodArea}</li>);
+      .map((foodArea) => <li key={foodArea}>{foodArea}</li>);
     return result;
   };
 

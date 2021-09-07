@@ -28,28 +28,49 @@ export default function Recipe({ mealDetails }) {
     return listIngredients;
   };
 
-  const userInterests = async () => {
+  const removeInterest = async () => {
+    const interests = await croct.evaluate('user\'s interests');
+    const filteredInterests = interests.filter((interest) => interest !== mealDetails.strArea);
+    await croct
+      .user
+      .edit()
+      .clear('interests')
+      .add('interests', filteredInterests)
+      .save();
+  };
+
+  const addInterest = async () => {
+    await croct
+      .user
+      .edit()
+      .add('interests', mealDetails.strArea)
+      .save();
+  };
+
+  const saveRecipe = async () => {
+    await croct
+      .user
+      .edit()
+      .add('custom.recipes', {
+        title: mealDetails.strMeal,
+        thumb: mealDetails.strMealThumb,
+        id: mealDetails.idMeal,
+      })
+      .save();
+  };
+
+  const manageCroctUser = async () => {
     if (like) {
-      await croct
-        .user
-        .edit()
-        .add('interests', mealDetails.strArea)
-        .save();
+      await addInterest();
+      await saveRecipe();
     } else {
-      const interests = await croct.evaluate('user\'s interests');
-      const filteredInterests = interests.filter((interest) => interest !== mealDetails.strArea);
-      await croct
-        .user
-        .edit()
-        .clear('interests')
-        .add('interests', filteredInterests)
-        .save();
+      await removeInterest();
     }
   };
 
   const userLiked = async () => {
     setLike(!like);
-    await userInterests();
+    await manageCroctUser();
   };
 
   const displayHeart = () => (like ? blackHeart : whiteHeart);
