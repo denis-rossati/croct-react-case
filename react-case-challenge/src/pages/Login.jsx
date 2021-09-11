@@ -53,7 +53,7 @@ export default function LoginPage() {
     <div id="login-container">
       <input type="text" onChange={verifyEmail} placeholder="e-mail" />
       <input type="password" onChange={verifyPassword} placeholder="password" />
-      <button type="submit" onClick={redirectToMainPage} disabled={buttonDisabled}>Log in</button>
+      <button id="login-button" type="submit" onClick={redirectToMainPage} disabled={buttonDisabled}>Log in</button>
       { shouldRedirect && <Redirect to="/main-page" /> }
     </div>
   );

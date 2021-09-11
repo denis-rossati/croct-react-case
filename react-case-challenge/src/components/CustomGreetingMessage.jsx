@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useCroct } from '@croct/plug-react';
 
+import './styles/CustomGreetingMessage.css';
+
 export default function CustomGreetingMessage({ country, changeMealGrid }) {
   const croct = useCroct();
   const [haveFindRecipe, setHaveFindedRecipe] = useState(true);
@@ -18,12 +20,12 @@ export default function CustomGreetingMessage({ country, changeMealGrid }) {
       const response = await fetch(url);
       const data = await response.json();
       changeMealGrid(data);
-      setGreetingMessage(`Based on your interests, we are showing you ${typeOfFood} food`);
+      setGreetingMessage(`Based on your interests, we are showing you ${typeOfFood} food!`);
     } else {
       const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
       const data = await response.json();
       changeMealGrid(data);
-      setGreetingMessage('It\'s your first time here :D? Here is a selection of our best recipes!');
+      setGreetingMessage('It\'s your first time here :D? Here is a selection of our best recipes:');
     }
   };
 
@@ -42,9 +44,9 @@ export default function CustomGreetingMessage({ country, changeMealGrid }) {
   }, []);
 
   return (
-    <div>
+    <div id="greeting-message">
       { haveFindRecipe
-        ? `Since you're from ${country}, let's show you some local recipes`
+        ? `Since you're from ${country}, let's show you some local recipes!`
         : greetingMessage}
     </div>
   );
