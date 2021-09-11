@@ -2,15 +2,13 @@
   margin: 0;
   padding: 0;
   border: none;
-  box-sizing: border-box;
 }
 
 body {
-  display: flex;
   align-content: center;
   align-items: center;
+  display: flex;
   justify-content: center;
-  justify-items: center;
   min-height: 100vh;
   min-width: 100vw;
   max-height: 100vh;
@@ -43,4 +41,5 @@ body {
   max-height: 80vh;
   max-width: 25vw;
   border-radius: 2%;
+  background-color: #ffffff;
 }
