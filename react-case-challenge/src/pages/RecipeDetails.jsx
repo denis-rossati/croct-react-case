@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Recipe from '../components/Recipe';
 import formatObject from '../helper/formatObject';
 
@@ -8,9 +8,9 @@ export default function RecipeDetails() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   // eslint-disable-next-line no-unused-vars
-  const [mealContent, setMealContent] = useState([]);
+  const [mealContent, setMealContent] = useState({});
 
-  const renderContent = () => (isLoading
+  const renderContent = () => (isLoading && mealContent.idMeal
     ? (<p>Loading...</p>) : <Recipe mealDetails={mealContent} />);
 
   useEffect(() => {
@@ -30,7 +30,6 @@ export default function RecipeDetails() {
       {
         renderContent()
       }
-      <Link to="/main-page">Voltar à página principal</Link>
     </div>
   );
 }

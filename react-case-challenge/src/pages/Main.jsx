@@ -6,6 +6,8 @@ import CustomGreetingMessage from '../components/CustomGreetingMessage';
 
 import findCountry from '../helper/findCountryName';
 
+import './styles/Main.css';
+
 export default function MainPage() {
   const [meals, setMeals] = useState({});
 

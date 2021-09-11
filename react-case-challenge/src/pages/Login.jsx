@@ -2,6 +2,8 @@ import React, { useState, useCallback } from 'react';
 import { useCroct } from '@croct/plug-react';
 import { Redirect } from 'react-router-dom';
 
+import './styles/Login.css';
+
 export default function LoginPage() {
   const croct = useCroct();
   const [validPassword, setValidPassword] = useState(false);
@@ -48,10 +50,10 @@ export default function LoginPage() {
   };
 
   return (
-    <div>
+    <div id="login-container">
       <input type="text" onChange={verifyEmail} placeholder="e-mail" />
       <input type="password" onChange={verifyPassword} placeholder="password" />
-      <button type="submit" onClick={redirectToMainPage} disabled={buttonDisabled}>Log in</button>
+      <button id="login-button" type="submit" onClick={redirectToMainPage} disabled={buttonDisabled}>Log in</button>
       { shouldRedirect && <Redirect to="/main-page" /> }
     </div>
   );

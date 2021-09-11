@@ -1,8 +1,11 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 import { useCroct } from '@croct/plug-react';
 import PropTypes from 'prop-types';
 import blackHeart from '../icons/black-heart.png';
 import whiteHeart from '../icons/heart.png';
+
+import './styles/Recipe.css';
 
 export default function Recipe({ mealDetails }) {
   const croct = useCroct();
@@ -15,7 +18,7 @@ export default function Recipe({ mealDetails }) {
       const measurement = `strMeasure${index}`;
       const ingredient = `strIngredient${index}`;
       listIngredients.push(
-        <li>
+        <li key={ingredient}>
           {mealDetails[ingredient]}
           {' '}
           -
@@ -44,7 +47,6 @@ export default function Recipe({ mealDetails }) {
       .add('interests', filteredInterests)
       .save();
 
-    console.log(filteredRecipes);
     /* two "clear" in a row did not make it :( so I have to separe them */
     await croct
       .user
@@ -62,11 +64,10 @@ export default function Recipe({ mealDetails }) {
       .add('custom.recipes', {
         title: mealDetails.strMeal,
         thumb: mealDetails.strMealThumb,
+        area: mealDetails.strArea,
         id: mealDetails.idMeal,
       })
       .save();
-    const result = await croct.evaluate('user\'s recipes');
-    console.log(result);
   };
 
   const manageCroctUser = async () => {
@@ -86,19 +87,21 @@ export default function Recipe({ mealDetails }) {
   const displayHeart = () => (like ? blackHeart : whiteHeart);
 
   return (
-    <main>
+    <main id="recipe-detail">
       <h1>{mealDetails.strMeal}</h1>
       <section>
         <img src={mealDetails.strMealThumb} alt={mealDetails.strMeal} />
       </section>
-      <h2>
-        Category:
-        {' '}
-        {mealDetails.strTags}
-      </h2>
-      <button type="button" onClick={() => userLiked()}>
-        <img src={displayHeart()} alt="like button" />
-      </button>
+      <div>
+        <h2>
+          Category:
+          {' '}
+          { mealDetails.strCategory }
+        </h2>
+        <button type="button" onClick={() => userLiked()}>
+          <img src={displayHeart()} alt="like button" />
+        </button>
+      </div>
       <ul>
         { showIngredients() }
       </ul>
@@ -108,7 +111,5 @@ export default function Recipe({ mealDetails }) {
 }
 
 Recipe.propTypes = {
-  mealDetails: PropTypes.objectOf(
-    [PropTypes.string, PropTypes.number],
-  ).isRequired,
+  mealDetails: PropTypes.objectOf(PropTypes.string).isRequired,
 };

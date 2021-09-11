@@ -4,6 +4,8 @@ import { useCroct } from '@croct/plug-react';
 import RecipeSnippet from '../components/RecipeSnippet';
 import formatRecipes from '../helper/formatRecipes';
 
+import './styles/Profile.css';
+
 export default function Profile() {
   const croct = useCroct();
   // if I get employed, my first question is to know why does react and croct together could'nt
@@ -26,7 +28,9 @@ export default function Profile() {
     const loadRecipes = async () => {
       await croct.evaluate('user\' recipes')
         .then((loadedRecipes) => formatRecipes(loadedRecipes))
-        .then((newRecipes) => setRecipes(newRecipes));
+        .then((newRecipes) => (newRecipes
+          ? setRecipes(newRecipes)
+          : setRecipes([])));
     };
 
     await loadEmail();
@@ -34,36 +38,65 @@ export default function Profile() {
     await loadRecipes();
   }, []);
 
-  const renderInterests = () => areaInterests
-    .reduce((acc, area) => {
-      if (acc.indexOf(area) === -1) {
-        acc.push(area);
-      }
-      return acc;
-    }, [])
-    .map((foodArea) => <li key={foodArea}>{foodArea}</li>);
+  const renderInterests = () => {
+    const interests = areaInterests
+      .reduce((acc, area) => {
+        if (acc.indexOf(area) === -1) {
+          acc.push(area);
+        }
+        return acc;
+      }, [])
+      .map((foodArea) => <li key={foodArea}>{foodArea}</li>);
+    if (interests.length > 0) {
+      return interests;
+    }
+    return <p>Actually, it looks like you haven&apos;t liked anything :p</p>;
+  };
 
-  const renderRecipes = () => recipes.map((meal, index) => (
-    <RecipeSnippet
-      key={index}
-      recipe={meal}
-    />
-  ));
+  const renderRecipes = () => {
+    const interests = recipes.map((meal, index) => (
+      <RecipeSnippet
+        key={index}
+        recipe={meal}
+      />
+    ));
+    if (interests.length > 0) {
+      return interests;
+    }
+    return (
+      <section>
+        <p>Nothing here too :(</p>
+        <p>
+          What about give a shot to our
+          {' '}
+          <a href="/main-page">recipes</a>
+          ? ;)
+        </p>
+      </section>
+    );
+  };
 
   return (
-    <div>
-      {email}
-      <p>
-        De acordo com as comidas que você deu like, você gosta de:
-      </p>
-      <ul>
-        { renderInterests() }
-      </ul>
+    <main id="profile">
+      <header id="interests">
+        <p>
+          Dear
+          {' '}
+          {email}
+          ,
+        </p>
+        <p>
+          according to the foods you liked, these are the type of food that you like:
+        </p>
+        <ul>
+          { renderInterests() }
+        </ul>
+      </header>
 
-      <p>As comidas em que você deu like foram:</p>
+      <p>And the foods you already liked are:</p>
       <div>
         { renderRecipes() }
       </div>
-    </div>
+    </main>
   );
 }
