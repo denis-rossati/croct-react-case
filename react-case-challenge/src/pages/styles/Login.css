@@ -1,0 +1,36 @@
+#login-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  min-height: 80vh;
+  overflow: hidden;
+}
+
+input {
+  background-color: #eaeaeaf5;
+  border: 3px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 10px 20px;
+  margin: 2%;
+  outline: none;
+  transition: 0.15s all;
+}
+
+input:focus {
+  background-color: #f6f6f6e2;
+}
+
+button {
+  margin-top: 5%;
+  padding: 2% 22.5%;
+  background-color: #eaeaeaf5;
+  border-radius: 10px;
+  transition: 0.10s ease-in;
+}
+
+button:enabled {
+  background-color: #4cd785;
+  border: 3px solid #32945b50;
+}
