@@ -14,7 +14,7 @@ export default function RecipeSnippet({ recipe }) {
         <img src={strMealThumb} alt="Recipe after being prepared" />
         <div>
           <p>{strMeal}</p>
-          <p>{ `${strArea} food` || '' }</p>
+          <p>{ `${strArea} food` }</p>
         </div>
       </Link>
     </div>

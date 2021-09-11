@@ -64,6 +64,7 @@ export default function Recipe({ mealDetails }) {
       .add('custom.recipes', {
         title: mealDetails.strMeal,
         thumb: mealDetails.strMealThumb,
+        area: mealDetails.strArea,
         id: mealDetails.idMeal,
       })
       .save();

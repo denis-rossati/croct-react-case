@@ -28,7 +28,9 @@ export default function Profile() {
     const loadRecipes = async () => {
       await croct.evaluate('user\' recipes')
         .then((loadedRecipes) => formatRecipes(loadedRecipes))
-        .then((newRecipes) => setRecipes(newRecipes));
+        .then((newRecipes) => (newRecipes
+          ? setRecipes(newRecipes)
+          : setRecipes([])));
     };
 
     await loadEmail();
@@ -48,7 +50,7 @@ export default function Profile() {
     if (interests.length > 0) {
       return interests;
     }
-    return <p>Looks like you haven&apos;t liked any food yet :p</p>;
+    return <p>Actually, it looks like you haven&apos;t liked anything :p</p>;
   };
 
   const renderRecipes = () => {
@@ -62,12 +64,15 @@ export default function Profile() {
       return interests;
     }
     return (
-      <p>
-        What about give a shot to our
-        {' '}
-        <a href="/main-page">recipes</a>
-        ? ;)
-      </p>
+      <section>
+        <p>Nothing here too :(</p>
+        <p>
+          What about give a shot to our
+          {' '}
+          <a href="/main-page">recipes</a>
+          ? ;)
+        </p>
+      </section>
     );
   };
 
@@ -75,18 +80,20 @@ export default function Profile() {
     <main id="profile">
       <header id="interests">
         <p>
+          Dear
+          {' '}
           {email}
           ,
         </p>
         <p>
-          de acordo com as comidas que você deu like, você gosta de:
+          according to the foods you liked, these are the type of food that you like:
         </p>
         <ul>
           { renderInterests() }
         </ul>
       </header>
 
-      <p>As comidas em que você deu like foram:</p>
+      <p>And the foods you already liked are:</p>
       <div>
         { renderRecipes() }
       </div>
