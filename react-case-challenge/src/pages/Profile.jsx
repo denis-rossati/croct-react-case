@@ -4,6 +4,8 @@ import { useCroct } from '@croct/plug-react';
 import RecipeSnippet from '../components/RecipeSnippet';
 import formatRecipes from '../helper/formatRecipes';
 
+import './styles/Profile.css';
+
 export default function Profile() {
   const croct = useCroct();
   // if I get employed, my first question is to know why does react and croct together could'nt
@@ -34,36 +36,60 @@ export default function Profile() {
     await loadRecipes();
   }, []);
 
-  const renderInterests = () => areaInterests
-    .reduce((acc, area) => {
-      if (acc.indexOf(area) === -1) {
-        acc.push(area);
-      }
-      return acc;
-    }, [])
-    .map((foodArea) => <li key={foodArea}>{foodArea}</li>);
+  const renderInterests = () => {
+    const interests = areaInterests
+      .reduce((acc, area) => {
+        if (acc.indexOf(area) === -1) {
+          acc.push(area);
+        }
+        return acc;
+      }, [])
+      .map((foodArea) => <li key={foodArea}>{foodArea}</li>);
+    if (interests.length > 0) {
+      return interests;
+    }
+    return <p>Looks like you haven&apos;t liked any food yet :p</p>;
+  };
 
-  const renderRecipes = () => recipes.map((meal, index) => (
-    <RecipeSnippet
-      key={index}
-      recipe={meal}
-    />
-  ));
+  const renderRecipes = () => {
+    const interests = recipes.map((meal, index) => (
+      <RecipeSnippet
+        key={index}
+        recipe={meal}
+      />
+    ));
+    if (interests.length > 0) {
+      return interests;
+    }
+    return (
+      <p>
+        What about give a shot to our
+        {' '}
+        <a href="/main-page">recipes</a>
+        ? ;)
+      </p>
+    );
+  };
 
   return (
-    <div>
-      {email}
-      <p>
-        De acordo com as comidas que você deu like, você gosta de:
-      </p>
-      <ul>
-        { renderInterests() }
-      </ul>
+    <main id="profile">
+      <header id="interests">
+        <p>
+          {email}
+          ,
+        </p>
+        <p>
+          de acordo com as comidas que você deu like, você gosta de:
+        </p>
+        <ul>
+          { renderInterests() }
+        </ul>
+      </header>
 
       <p>As comidas em que você deu like foram:</p>
       <div>
         { renderRecipes() }
       </div>
-    </div>
+    </main>
   );
 }
