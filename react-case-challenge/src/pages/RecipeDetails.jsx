@@ -8,9 +8,9 @@ export default function RecipeDetails() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   // eslint-disable-next-line no-unused-vars
-  const [mealContent, setMealContent] = useState([]);
+  const [mealContent, setMealContent] = useState({});
 
-  const renderContent = () => (isLoading
+  const renderContent = () => (isLoading && mealContent.idMeal
     ? (<p>Loading...</p>) : <Recipe mealDetails={mealContent} />);
 
   useEffect(() => {

@@ -27,9 +27,11 @@ function App() {
           <LoginPage />
         </Route>
       </Switch>
-      <Link id="back-to-main" to="/main-page">
-        Voltar à página principal
-      </Link>
+      <footer id="back-to-main">
+        <Link to="/main-page">
+          Voltar à página principal
+        </Link>
+      </footer>
     </>
   );
 }

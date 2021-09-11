@@ -47,12 +47,20 @@ body {
 }
 
 #back-to-main {
+  max-width: fit-content;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#back-to-main a {
   text-decoration: none;
   color: #909090;
-  transition: 0.15s all;
+  transition: 0.10s all;
   width: fit-content;
 }
 
-#back-to-main:hover {
-  color: #3c3c3c;
+#back-to-main a:hover {
+  color: #1b261b;
 }

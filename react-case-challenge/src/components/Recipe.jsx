@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useState } from 'react';
 import { useCroct } from '@croct/plug-react';
 import PropTypes from 'prop-types';
@@ -17,7 +18,7 @@ export default function Recipe({ mealDetails }) {
       const measurement = `strMeasure${index}`;
       const ingredient = `strIngredient${index}`;
       listIngredients.push(
-        <li>
+        <li key={ingredient}>
           {mealDetails[ingredient]}
           {' '}
           -
@@ -46,7 +47,6 @@ export default function Recipe({ mealDetails }) {
       .add('interests', filteredInterests)
       .save();
 
-    console.log(filteredRecipes);
     /* two "clear" in a row did not make it :( so I have to separe them */
     await croct
       .user
@@ -67,8 +67,6 @@ export default function Recipe({ mealDetails }) {
         id: mealDetails.idMeal,
       })
       .save();
-    const result = await croct.evaluate('user\'s recipes');
-    console.log(result);
   };
 
   const manageCroctUser = async () => {
@@ -97,7 +95,7 @@ export default function Recipe({ mealDetails }) {
         <h2>
           Category:
           {' '}
-          {mealDetails.strTags}
+          { mealDetails.strCategory }
         </h2>
         <button type="button" onClick={() => userLiked()}>
           <img src={displayHeart()} alt="like button" />
@@ -112,7 +110,5 @@ export default function Recipe({ mealDetails }) {
 }
 
 Recipe.propTypes = {
-  mealDetails: PropTypes.objectOf(
-    [PropTypes.string, PropTypes.number],
-  ).isRequired,
+  mealDetails: PropTypes.objectOf(PropTypes.string).isRequired,
 };
