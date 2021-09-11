@@ -45,3 +45,14 @@ body {
   background-color: #ffffff;
   box-shadow: 0 0 8px #909090;
 }
+
+#back-to-main {
+  text-decoration: none;
+  color: #909090;
+  transition: 0.15s all;
+  width: fit-content;
+}
+
+#back-to-main:hover {
+  color: #3c3c3c;
+}

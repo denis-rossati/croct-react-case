@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import blackHeart from '../icons/black-heart.png';
 import whiteHeart from '../icons/heart.png';
 
+import './styles/Recipe.css';
+
 export default function Recipe({ mealDetails }) {
   const croct = useCroct();
   const [like, setLike] = useState(false);
@@ -86,19 +88,21 @@ export default function Recipe({ mealDetails }) {
   const displayHeart = () => (like ? blackHeart : whiteHeart);
 
   return (
-    <main>
+    <main id="recipe-detail">
       <h1>{mealDetails.strMeal}</h1>
       <section>
         <img src={mealDetails.strMealThumb} alt={mealDetails.strMeal} />
       </section>
-      <h2>
-        Category:
-        {' '}
-        {mealDetails.strTags}
-      </h2>
-      <button type="button" onClick={() => userLiked()}>
-        <img src={displayHeart()} alt="like button" />
-      </button>
+      <div>
+        <h2>
+          Category:
+          {' '}
+          {mealDetails.strTags}
+        </h2>
+        <button type="button" onClick={() => userLiked()}>
+          <img src={displayHeart()} alt="like button" />
+        </button>
+      </div>
       <ul>
         { showIngredients() }
       </ul>
