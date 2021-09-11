@@ -42,4 +42,5 @@ body {
   max-width: 25vw;
   border-radius: 2%;
   background-color: #ffffff;
+  box-shadow: 0 0 8px #909090;
 }
