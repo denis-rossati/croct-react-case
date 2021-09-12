@@ -83,3 +83,9 @@ Anonymize
 
 
 ```
+
+## Feedback geral
+
+Achei a ferramenta muito chique e útil. Sei que ainda não explorei todo o potencial dela mas essa pequena experiência já me fez brilhar os olhos ainda mais que tipo de mecanismos devem girar por trás de tudo.
+
+Como um desenvolvedor iniciante, devo dizer que ela realmente não precisa de super entendimentos pra ser usada. Mas sendo honesto e transparente, acho que podemos simplificar ainda mais, de repente um estudo ainda mais aprofundado em React possa abrir outros horizontes pra resolver as diversas promises de uma forma ainda mais simples, deixando a ferramenta cada vez mais facil de ser utilizada.
