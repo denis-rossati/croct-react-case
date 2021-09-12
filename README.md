@@ -4,7 +4,7 @@ This is my atempt to show a fraction of what I can do using a tool developed by 
 
 The technology can be programmed to collect useful information about the user such as location, interests and many more. That way, we can offer a customized service to any costumer, and that gave me the final idea to make a simple recipe app.
 
-Please, check the deploy right here!
+I still haven't learned how to deploy properly :( but in my studies routine, this is scheduled for 09/27/2021!
 
 ## What does the app?
 
