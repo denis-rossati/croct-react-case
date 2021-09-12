@@ -4,6 +4,8 @@ This is my atempt to show a fraction of what I can do using a tool developed by 
 
 The technology can be programmed to collect useful information about the user such as location, interests and many more. That way, we can offer a customized service to any costumer, and that gave me the final idea to make a simple recipe app.
 
+Please, check the deploy right here!
+
 ## What does the app?
 
 In this application, the user can check or search a collection of recipes if its his first time in the site. But as soon he like a recipe or check them too many times, the system will understand wich meals he like the most, and will start to recomend more recipes like that.
@@ -12,6 +14,11 @@ In the profile page, the user can check which recipes he liked and from wich nac
 
 ### Gifs from the app
 
+![Login page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/login.gif?raw=true)
+
+![Main page and recipe details page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/main-page-and-details.gif?raw=true)
+
+![Profile page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/profile.gif?raw=true)
 
 ## Technical Decisions
 
