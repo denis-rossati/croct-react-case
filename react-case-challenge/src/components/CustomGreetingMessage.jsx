@@ -24,7 +24,6 @@ export default function CustomGreetingMessage({ country, changeMealGrid }) {
     const url = `https://www.themealdb.com/api/json/v1/1/filter.php?a=${typeOfFood}`;
     const response = await fetch(url);
     const data = await response.json();
-    console.log(data);
     data.meals = addAreaToMeals(data, typeOfFood);
     changeMealGrid(data);
     setGreetingMessage(`Based on your interests, we are showing you some ${typeOfFood} food!`);
