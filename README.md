@@ -14,11 +14,17 @@ In the profile page, the user can check which recipes he liked and from wich nac
 
 ### Gifs from the app
 
-![Login page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/login.gif?raw=true)
+<details>
 
-![Main page and recipe details page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/main-page-and-details.gif?raw=true)
+  <Summary>See more...</Summary>
+  
+  ![Login page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/login.gif?raw=true)
 
-![Profile page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/profile.gif?raw=true)
+  ![Main page and recipe details page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/main-page-and-details.gif?raw=true)
+
+  ![Profile page](https://github.com/denis-rossati/croct-react-case/blob/master/readme-gifs/profile.gif?raw=true)
+
+</details>
 
 ## Technical Decisions
 
